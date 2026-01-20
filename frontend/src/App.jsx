@@ -1,10 +1,16 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import RoleSelection from './RoleSelection';
 
 function App() {
 
   return (
     <>
-      <h1 className="text-red-300">Doc Trek - Doctor appointment booking</h1>
-      <button class="btn btn-primary">Hello DaisyUI</button>
+      <Router>
+        <Routes>
+          <Route path="/" element={<RoleSelection />} />
+         
+        </Routes>
+      </Router>
     </>
   );
 }
