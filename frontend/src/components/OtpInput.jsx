@@ -49,7 +49,7 @@ function OtpInput({ length = 6, onOtpSubmit }) {
             onChange={(c) => handleChange(index, c)}
             onClick={() => handleClick(index)}
             onKeyDown={(e) => handleKeyDown(index, e)}
-            className="w-10 h-10 sm:w-12 sm:h-12 border rounded-sm text-center text-lg md:ml-2"
+            className="w-10 h-10 sm:w-12 sm:h-12 border text-black rounded-sm text-center text-lg md:ml-2"
           />
         );
       })}

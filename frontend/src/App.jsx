@@ -7,8 +7,11 @@ import VerifyOtp from './auth/user/VerifyOtp';
 import { useUserAuthStore } from './store/userAuthStore';
 import UserHome from './user/UserHome';
 import { useEffect } from 'react';
-import ClinicRequeste from './admin/ClinicRequests.jsx';
 import ClinicRequests from './admin/ClinicRequests.jsx';
+import AdminMainLayout from './layout/AdminMainLayout.jsx';
+import Doctors from './admin/Doctors.jsx';
+import Users from './admin/Users.jsx';
+import Appointments from './admin/Appointments.jsx';
 
 function App() {
   const { user, isUserAuthenticated, isLoggedIn, checkAuth } = useUserAuthStore();
@@ -37,7 +40,7 @@ function App() {
           <Route
             path="userLogin"
             element={
-              !isUserAuthenticated  ? (
+              !isUserAuthenticated ? (
                 <UserLogin />
               ) : (
                 <Navigate to={"/UserHome"} />
@@ -61,18 +64,59 @@ function App() {
             }
           />
 
-        {/* Admin ROutes */}
-        <Route 
-          path="/admin/clinicRequests"
-          element={
-            isUserAuthenticated && user?.role === "admin" ? (
-              <ClinicRequests />
+          {/* Admin ROutes */}
+          <Route
+            path="/admin/clinicRequests"
+            element={
+              isUserAuthenticated && user?.role === "admin" ? (
+                <AdminMainLayout>
+                  <ClinicRequests />
+                </AdminMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
+            }
+          />
 
-            ) : (
-              <Navigate to="/userLogin" />
-            )
-          }
-        />
+          <Route
+            path="/admin/doctors"
+            element={
+              isUserAuthenticated && user?.role === "admin" ? (
+                <AdminMainLayout>
+                  <Doctors />
+                </AdminMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
+            }
+          />
+
+          <Route
+            path="/admin/users"
+            element={
+              isUserAuthenticated && user?.role === "admin" ? (
+                <AdminMainLayout>
+                  <Users />
+                </AdminMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
+            }
+          />
+          
+          <Route
+            path="/admin/appointments"
+            element={
+              isUserAuthenticated && user?.role === "admin" ? (
+                <AdminMainLayout>
+                  <Appointments />
+                </AdminMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
+            }
+          />
+
 
         </Routes>
       </Router>

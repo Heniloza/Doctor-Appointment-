@@ -21,9 +21,7 @@ export const generateOtp = async (userId) => {
 
 export const verifyOtpController = async (req, res) => {
   try {
-    const { userId, otp } = req.body;
-    console.log(userId,otp);
-    
+    const { userId, otp } = req.body;    
 
     if (!userId || !otp) {
       return res.status(400).json({
