@@ -24,6 +24,12 @@ import { useClinicAuthStore } from './store/clinicAuthStore.js';
 import ClinicHome from './clinic/ClinicHome.jsx';
 import ClinicMainLayout from './layout/ClinicMainLayout.jsx';
 import Clinics from './admin/Clinics.jsx';
+import ClinicDoctors from './clinic/ClinicDoctors.jsx';
+import ClinicAppointments from './clinic/ClinicAppointments.jsx';
+import ClinicPatients from './clinic/ClinicPatients.jsx';
+import ClinicSettings from './clinic/ClinicSettings.jsx';
+import ClinicNotification from './clinic/ClinicNotification.jsx';
+import ClinicProfile from './clinic/ClinicProfile.jsx';
 
 function App() {
   const { user, isUserAuthenticated, isLoggedIn, checkAuth, isAuthLoading } =
@@ -92,71 +98,85 @@ function App() {
           <Route
             path="/userHome"
             element={
-              isUserAuthenticated ? 
-              <UserMainLayout>
-                <UserHome /> 
-              </UserMainLayout>
-              : <Navigate to="/userLogin" />
+              isUserAuthenticated ? (
+                <UserMainLayout>
+                  <UserHome />
+                </UserMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
             }
           />
           <Route
             path="/findDoctors"
             element={
-              isUserAuthenticated ? 
-              <UserMainLayout>
-                <FindDoctors /> 
-              </UserMainLayout>
-              : <Navigate to="/userLogin" />
+              isUserAuthenticated ? (
+                <UserMainLayout>
+                  <FindDoctors />
+                </UserMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
             }
           />
           <Route
             path="/myAppointments"
             element={
-              isUserAuthenticated ? 
-              <UserMainLayout>
-                <MyAppointments /> 
-              </UserMainLayout>
-              : <Navigate to="/userLogin" />
+              isUserAuthenticated ? (
+                <UserMainLayout>
+                  <MyAppointments />
+                </UserMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
             }
           />
           <Route
             path="/healthRecords"
             element={
-              isUserAuthenticated ? 
-              <UserMainLayout>
-                <UserHealthRecords /> 
-              </UserMainLayout>
-              : <Navigate to="/userLogin" />
+              isUserAuthenticated ? (
+                <UserMainLayout>
+                  <UserHealthRecords />
+                </UserMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
             }
           />
           <Route
             path="/healthRecords"
             element={
-              isUserAuthenticated ? 
-              <UserMainLayout>
-                <UserHealthRecords /> 
-              </UserMainLayout>
-              : <Navigate to="/userLogin" />
+              isUserAuthenticated ? (
+                <UserMainLayout>
+                  <UserHealthRecords />
+                </UserMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
             }
           />
           <Route
             path="/profile"
             element={
-              isUserAuthenticated ? 
-              <UserMainLayout>
-                <UserProfile /> 
-              </UserMainLayout>
-              : <Navigate to="/userLogin" />
+              isUserAuthenticated ? (
+                <UserMainLayout>
+                  <UserProfile />
+                </UserMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
             }
           />
           <Route
             path="/userNotifications"
             element={
-              isUserAuthenticated ? 
-              <UserMainLayout>
-                <UserNotifications /> 
-              </UserMainLayout>
-              : <Navigate to="/userLogin" />
+              isUserAuthenticated ? (
+                <UserMainLayout>
+                  <UserNotifications />
+                </UserMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
             }
           />
 
@@ -199,7 +219,7 @@ function App() {
               )
             }
           />
-          
+
           <Route
             path="/admin/appointments"
             element={
@@ -227,18 +247,118 @@ function App() {
           />
 
           {/* Clinic Routes */}
-          <Route path="/clinicSignup" element={!isClinicAuthenticated ? <ClinicSignup /> :<Navigate to={"/clinicHome"}/> } />
-
-          <Route path="/clinicLogin" element={!isClinicAuthenticated?<ClinicLogin/>:<Navigate to={"/clinicHome"} />} />
+          <Route
+            path="/clinicSignup"
+            element={
+              !isClinicAuthenticated ? (
+                <ClinicSignup />
+              ) : (
+                <Navigate to={"/clinicHome"} />
+              )
+            }
+          />
 
           <Route
-           path="/clinicHome" 
-          element={isClinicAuthenticated ? 
-          <ClinicMainLayout>
-            <ClinicHome /> 
-          </ClinicMainLayout>
-          : <Navigate to="/clinicLogin" />} />
+            path="/clinicLogin"
+            element={
+              !isClinicAuthenticated ? (
+                <ClinicLogin />
+              ) : (
+                <Navigate to={"/clinicHome"} />
+              )
+            }
+          />
 
+          <Route
+            path="/clinicHome"
+            element={
+              isClinicAuthenticated ? (
+                <ClinicMainLayout>
+                  <ClinicHome />
+                </ClinicMainLayout>
+              ) : (
+                <Navigate to="/clinicLogin" />
+              )
+            }
+          />
+
+          <Route
+            path="/clinicDoctors"
+            element={
+              isClinicAuthenticated ? (
+                <ClinicMainLayout>
+                  <ClinicDoctors />
+                </ClinicMainLayout>
+              ) : (
+                <Navigate to="/clinicLogin" />
+              )
+            }
+          />
+
+          <Route
+            path="/clinicAppointments"
+            element={
+              isClinicAuthenticated ? (
+                <ClinicMainLayout>
+                  <ClinicAppointments />
+                </ClinicMainLayout>
+              ) : (
+                <Navigate to="/clinicLogin" />
+              )
+            }
+          />
+
+          <Route
+            path="/clinicPatients"
+            element={
+              isClinicAuthenticated ? (
+                <ClinicMainLayout>
+                  <ClinicPatients />
+                </ClinicMainLayout>
+              ) : (
+                <Navigate to="/clinicLogin" />
+              )
+            }
+          />
+
+          <Route
+            path="/clinicProfile"
+            element={
+              isClinicAuthenticated ? (
+                <ClinicMainLayout>
+                  <ClinicProfile />
+                </ClinicMainLayout>
+              ) : (
+                <Navigate to="/clinicLogin" />
+              )
+            }
+          />
+
+          <Route
+            path="/clinicSettings"
+            element={
+              isClinicAuthenticated ? (
+                <ClinicMainLayout>
+                  <ClinicSettings />
+                </ClinicMainLayout>
+              ) : (
+                <Navigate to="/clinicLogin" />
+              )
+            }
+          />
+
+          <Route
+            path="/clinicNotifications"
+            element={
+              isClinicAuthenticated ? (
+                <ClinicMainLayout>
+                  <ClinicNotification />
+                </ClinicMainLayout>
+              ) : (
+                <Navigate to="/clinicLogin" />
+              )
+            }
+          />
         </Routes>
       </Router>
       <Toaster position="top-right" reverseOrder={false} />

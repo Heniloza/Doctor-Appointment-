@@ -5,7 +5,7 @@ function ClinicMainLayout({ children }) {
   return (
     <div>
       <ClinicNavbar />
-      <main style={{ padding: "20px" }}>{children}</main>
+      <main>{children}</main>
     </div>
   );
 }

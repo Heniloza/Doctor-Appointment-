@@ -10,7 +10,6 @@ function Users() {
     fetchAllUsers();
   }, []);
 
-  // Filter users based on search term
   const filteredUsers =
     users?.filter(
       (user) =>

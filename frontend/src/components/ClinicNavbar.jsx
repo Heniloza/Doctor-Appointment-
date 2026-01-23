@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useClinicAuthStore } from "../store/clinicAuthStore.js";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useClinicAuthStore } from "../store/clinicAuthStore";
 import {
   Building2,
   Menu,
@@ -18,6 +18,7 @@ import {
 
 function ClinicNavbar() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { clinic, clinicLogout } = useClinicAuthStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -28,10 +29,10 @@ function ClinicNavbar() {
   };
 
   const navLinks = [
-    { name: "Home", path: "/clinicHome", icon: Home },
-    { name: "Appointments", path: "/clinic/appointments", icon: Calendar },
-    { name: "Patients", path: "/clinic/patients", icon: Users },
-    { name: "Messages", path: "/clinic/messages", icon: MessageSquare },
+    { name: "Dashboard", path: "/clinicHome", icon: Home },
+    { name: "Doctors", path: "/clinicDoctors", icon: Users },
+    { name: "Appointments", path: "/clinicAppointments", icon: Calendar },
+    { name: "Patients", path: "/clinicPatients", icon: Users },
   ];
 
   return (
@@ -40,10 +41,7 @@ function ClinicNavbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo and Brand */}
           <div className="flex items-center">
-            <Link
-              to="/clinic/dashboard"
-              className="flex items-center space-x-2"
-            >
+            <Link to="/clinicHome" className="flex items-center space-x-2">
               <div className="bg-blue-600 p-2 rounded-lg">
                 <Building2 className="h-6 w-6 text-white" />
               </div>
@@ -60,14 +58,19 @@ function ClinicNavbar() {
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
+              const isActive = location.pathname === link.path;
               return (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className="flex items-center space-x-1 px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                  className={`flex items-center space-x-1 px-3 py-2 rounded-lg font-medium transition ${
+                    isActive
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                  }`}
                 >
                   <Icon className="h-4 w-4" />
-                  <span className="text-sm font-medium">{link.name}</span>
+                  <span className="text-sm">{link.name}</span>
                 </Link>
               );
             })}
@@ -76,7 +79,7 @@ function ClinicNavbar() {
           {/* Right Section - Notifications & Profile */}
           <div className="flex items-center space-x-3">
             {/* Notifications */}
-            <button className="hidden md:block relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition">
+            <button onClick={()=> navigate("/clinicNotifications")} className="hidden md:block relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition">
               <Bell className="h-5 w-5" />
               <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
             </button>
@@ -125,7 +128,7 @@ function ClinicNavbar() {
                     </div>
 
                     <Link
-                      to="/clinic/profile"
+                      to="/clinicProfile"
                       onClick={() => setIsProfileDropdownOpen(false)}
                       className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
                     >
@@ -134,7 +137,7 @@ function ClinicNavbar() {
                     </Link>
 
                     <Link
-                      to="/clinic/settings"
+                      to="/clinicSettings"
                       onClick={() => setIsProfileDropdownOpen(false)}
                       className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
                     >
@@ -177,15 +180,20 @@ function ClinicNavbar() {
           <div className="px-4 py-3 space-y-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
+              const isActive = location.pathname === link.path;
               return (
                 <Link
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg font-medium transition ${
+                    isActive
+                      ? "bg-blue-600 text-white"
+                      : "text-gray-700 hover:bg-blue-50 hover:text-blue-600"
+                  }`}
                 >
                   <Icon className="h-5 w-5" />
-                  <span className="font-medium">{link.name}</span>
+                  <span>{link.name}</span>
                 </Link>
               );
             })}
@@ -193,7 +201,7 @@ function ClinicNavbar() {
             <div className="border-t border-gray-200 my-2"></div>
 
             <Link
-              to="/clinic/profile"
+              to="/clinicProfile"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
             >
@@ -202,7 +210,7 @@ function ClinicNavbar() {
             </Link>
 
             <Link
-              to="/clinic/settings"
+              to="/clinicSettings"
               onClick={() => setIsMobileMenuOpen(false)}
               className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
             >

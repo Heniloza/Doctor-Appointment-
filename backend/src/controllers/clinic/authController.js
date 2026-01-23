@@ -41,7 +41,7 @@ export const clinicLoginController = async (req, res) => {
       return res.status(404).json({ message: "Clinic not found" });
     }    
 
-    if (clinic.status !== "approved") {
+    if (clinic.status !== "approved" && clinic.status !== "rejected") {
       return res.status(403).json({
         message: "Clinic not verified by admin yet",
       });
