@@ -142,7 +142,7 @@ export const updateDoctorController = async (req, res) => {
     const doctor = await DOCTOR.findOne({
       _id: req.params.id,
       clinicId: req.clinic._id,
-    });
+    }).populate("clinicId", "clinicName city");
 
     if (!doctor) {
       return res.status(404).json({
@@ -306,9 +306,9 @@ export const doctorLoginController = async (req, res) => {
 
 export const updateDoctorOwnProfileController = async (req, res) => {
   try {
-    const { name, phone, bio, languages, profilePicture } = req.body;
+    const { name, phone, bio, profilePicture } = req.body;
 
-    const doctor = await DOCTOR.findById(req.doctor._id);
+    const doctor = await DOCTOR.findById(req.doctor._id).populate("clinicId", "clinicName city phone");
 
     if (!doctor) {
       return res.status(404).json({
@@ -320,7 +320,6 @@ export const updateDoctorOwnProfileController = async (req, res) => {
     if (name) doctor.name = name;
     if (phone) doctor.phone = phone;
     if (bio !== undefined) doctor.bio = bio;
-    if (languages) doctor.languages = languages;
     if (profilePicture !== undefined) doctor.profilePicture = profilePicture;
 
     await doctor.save();

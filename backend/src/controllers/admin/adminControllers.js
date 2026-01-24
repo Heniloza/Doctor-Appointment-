@@ -1,5 +1,6 @@
 import ClINIC from "../../models/clinicModel.js";
 import USER from "../../models/userModel.js";
+import DOCTOR from "../../models/doctorModel.js";
 
 export const getPendingClinicsController = async (req, res) => {
   try {
@@ -116,3 +117,21 @@ export const getAllClinicsController = async (req, res) => {
     });
   }
 };
+
+export const getAllDoctorsController = async (req,res)=>{
+  try {
+    const doctors = await DOCTOR.find().select("-password").populate("clinicId","name city");
+
+    res.status(200).json({
+      success: true,
+      count: doctors.length,
+      data: doctors,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error fetching doctors",
+      error: error.message,
+    });
+  }
+}

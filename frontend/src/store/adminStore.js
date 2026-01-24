@@ -6,6 +6,7 @@ export const useAdminStore = create((set) => ({
   pendingClinics: [],
   clinics: [],
   users: [],
+  doctors: [],
   isLoading: false,
 
   fetchPendingClinics: async () => {
@@ -67,4 +68,17 @@ export const useAdminStore = create((set) => ({
       set({ isLoading: false });
     }
   },
+
+  fetchAllDoctors: async () => {
+    set({ isLoading: true });
+    try {
+      const res = await axiosInstance.get("/admin/doctors");
+      set({ doctors: res.data.data });
+    } catch (error) {
+      toast.error("Failed to fetch doctors");
+    } finally {
+      set({ isLoading: false });
+    }
+  },
+
 }));
