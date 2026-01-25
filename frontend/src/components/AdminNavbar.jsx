@@ -58,7 +58,6 @@ function AdminNavbar() {
     <nav className="bg-gradient-to-r from-blue-500 via-blue-600 to-green-500 shadow-xl sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-xl flex items-center justify-center shadow-lg transform hover:rotate-6 transition-transform">
               <Shield className="w-6 h-6 sm:w-7 sm:h-7 text-blue-600" />
@@ -73,7 +72,6 @@ function AdminNavbar() {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-2">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -93,7 +91,6 @@ function AdminNavbar() {
               );
             })}
 
-            {/* Logout Button */}
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 px-4 py-2 rounded-xl font-semibold text-sm bg-red-500 text-white hover:bg-red-600 transition-all duration-300 ml-2 shadow-lg hover:scale-105"
@@ -103,7 +100,6 @@ function AdminNavbar() {
             </button>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -119,7 +115,6 @@ function AdminNavbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white/10 backdrop-blur-lg border-t border-white/20">
           <div className="px-4 py-3 space-y-2">

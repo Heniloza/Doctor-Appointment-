@@ -54,7 +54,6 @@ function UserNavbar() {
     <nav className="bg-white border-b border-gray-200 shadow-sm sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
-          {/* Logo */}
           <div
             onClick={() => navigate("/userHome")}
             className="flex items-center gap-2 sm:gap-3 cursor-pointer group"
@@ -72,7 +71,6 @@ function UserNavbar() {
             </div>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -96,15 +94,12 @@ function UserNavbar() {
             })}
           </div>
 
-          {/* Right Side - Desktop */}
           <div className="hidden md:flex items-center gap-2">
-            {/* Notifications */}
             <button onClick={()=>navigate("/userNotifications")} className="relative p-2.5 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all">
               <Bell className="w-5 h-5" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full"></span>
             </button>
 
-            {/* Profile Button */}
             <button
               onClick={() => navigate("/profile")}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl font-medium text-sm transition-all duration-200 ${
@@ -121,7 +116,6 @@ function UserNavbar() {
               </span>
             </button>
 
-            {/* Logout Button */}
             <button
               onClick={handleLogout}
               className="flex items-center gap-2 px-4 py-2.5 rounded-xl font-bolder text-sm bg-teal-700 text-white border border-gray-300 hover:bg-teal-900 hover:border-gray-400 transition-all duration-200"
@@ -131,15 +125,12 @@ function UserNavbar() {
             </button>
           </div>
 
-          {/* Mobile Right Side */}
           <div className="md:hidden flex items-center gap-2">
-            {/* Mobile Notifications */}
             <button className="relative p-2 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all">
               <Bell className="w-5 h-5" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full"></span>
             </button>
 
-            {/* Mobile Menu Toggle */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="text-gray-700 hover:bg-gray-50 hover:text-gray-900 p-2 rounded-xl transition-all"
@@ -154,11 +145,9 @@ function UserNavbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
       {mobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200 shadow-lg">
           <div className="px-3 sm:px-4 py-4 space-y-2">
-            {/* User Info Card */}
             {user && (
               <div className="flex items-center gap-3 px-4 py-3 mb-3 bg-teal-50 rounded-xl border border-teal-100">
                 <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center shadow-sm flex-shrink-0">
@@ -173,7 +162,6 @@ function UserNavbar() {
               </div>
             )}
 
-            {/* Navigation Items */}
             {navItems.map((item) => {
               const Icon = item.icon;
               const active = isActive(item.path);
@@ -196,10 +184,8 @@ function UserNavbar() {
               );
             })}
 
-            {/* Divider */}
             <div className="border-t border-gray-200 my-3"></div>
 
-            {/* Profile */}
             <button
               onClick={() => {
                 navigate("/profile");
@@ -215,7 +201,6 @@ function UserNavbar() {
               My Profile
             </button>
 
-            {/* Logout */}
             <button
               onClick={() => {
                 handleLogout();

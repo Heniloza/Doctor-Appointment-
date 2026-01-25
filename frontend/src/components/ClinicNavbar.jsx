@@ -39,7 +39,6 @@ function ClinicNavbar() {
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo and Brand */}
           <div className="flex items-center">
             <Link to="/clinicHome" className="flex items-center space-x-2">
               <div className="bg-blue-600 p-2 rounded-lg">
@@ -54,7 +53,6 @@ function ClinicNavbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
@@ -76,15 +74,12 @@ function ClinicNavbar() {
             })}
           </div>
 
-          {/* Right Section - Notifications & Profile */}
           <div className="flex items-center space-x-3">
-            {/* Notifications */}
             <button onClick={()=> navigate("/clinicNotifications")} className="hidden md:block relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition">
               <Bell className="h-5 w-5" />
               <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
             </button>
 
-            {/* Profile Dropdown */}
             <div className="relative">
               <button
                 onClick={() => setIsProfileDropdownOpen(!isProfileDropdownOpen)}
@@ -110,7 +105,6 @@ function ClinicNavbar() {
                 <ChevronDown className="hidden md:block h-4 w-4 text-gray-500" />
               </button>
 
-              {/* Dropdown Menu */}
               {isProfileDropdownOpen && (
                 <>
                   <div
@@ -159,7 +153,6 @@ function ClinicNavbar() {
               )}
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="md:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
@@ -174,7 +167,6 @@ function ClinicNavbar() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-white border-t border-gray-200">
           <div className="px-4 py-3 space-y-1">

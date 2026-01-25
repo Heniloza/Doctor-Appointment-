@@ -41,7 +41,6 @@ function DoctorNavbar() {
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo and Brand */}
           <div className="flex items-center">
             <Link to="/doctorHome" className="flex items-center space-x-2">
               <div className="bg-emerald-600 p-2 rounded-lg">
@@ -56,7 +55,6 @@ function DoctorNavbar() {
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
             {navLinks.map((link) => {
               const Icon = link.icon;
@@ -78,9 +76,7 @@ function DoctorNavbar() {
             })}
           </div>
 
-          {/* Right Section - Notifications & Profile */}
           <div className="flex items-center space-x-3">
-            {/* Notifications */}
             <button
               onClick={() => navigate("/doctorNotifications")}
               className="hidden md:block relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
