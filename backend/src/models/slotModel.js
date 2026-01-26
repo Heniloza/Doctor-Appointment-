@@ -49,6 +49,15 @@ const slotSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
+slotSchema.index({ doctorId: 1, date: 1, startTime: 1 });
+slotSchema.index({ clinicId: 1, date: 1 });
+slotSchema.index({ isBooked: 1, isAvailable: 1 });
+
+slotSchema.index(
+  { doctorId: 1, date: 1, startTime: 1, endTime: 1 },
+  { unique: true }
+);
+
 const SLOT = mongoose.model("Slot", slotSchema);
 
 export default SLOT;

@@ -7,6 +7,7 @@ import clinicRoutes from './routes/clinicRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import clinicDoctorRoutes from './routes/clinicDoctorRoutes.js';
 import doctorAuthRoutes from './routes/doctorRoutes.js';
+import timeSlotRoutes from './routes/slotRoutes.js';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 
@@ -37,6 +38,7 @@ app.use("/api/clinic",clinicRoutes)
 app.use("/api/admin",adminRoutes)
 app.use("/api/clinic/doctors", clinicDoctorRoutes);
 app.use("/api/doctor", doctorAuthRoutes);
+app.use("/api/doctor/slots", timeSlotRoutes);
 
 app.listen(PORT, () => {
   console.log(`SERVER IS RUNNING ON PORT ${PORT}`);
