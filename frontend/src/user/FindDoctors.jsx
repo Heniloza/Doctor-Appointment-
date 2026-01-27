@@ -126,7 +126,7 @@ function FindDoctors() {
   });
 
   const handleBookAppointment = (doctor) => {
-    navigate(`/book-appointment/${doctor._id}`);
+    navigate(`/viewDoctorProfile/${doctor._id}`);
   };
 
   return (
@@ -344,7 +344,7 @@ function FindDoctors() {
                       <div className="flex items-start justify-between mb-2">
                         <div>
                           <h3 className="text-xl font-bold text-gray-900 mb-1">
-                               {doctor.name}
+                            {doctor.name}
                           </h3>
                           <p className="text-teal-600 font-semibold mb-2">
                             {doctor.specialization}
@@ -400,15 +400,7 @@ function FindDoctors() {
                           <Calendar className="w-5 h-5" />
                           Book Appointment
                         </button>
-                        <button
-                          onClick={() =>
-                            navigate(`/doctor-profile/${doctor._id}`)
-                          }
-                          className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition flex items-center gap-2"
-                        >
-                          View Profile
-                          <ChevronRight className="w-5 h-5" />
-                        </button>
+                       
                       </div>
                     </div>
                   </div>
@@ -417,7 +409,6 @@ function FindDoctors() {
             </div>
           </>
         )}
-
       </div>
     </div>
   );

@@ -41,6 +41,7 @@ import DoctorAppointments from './doctor/DoctorAppointments.jsx';
 import DoctorSchedule from './doctor/DoctorSchedule.jsx';
 import DoctorPatients from './doctor/DoctorPatients.jsx';
 import NotFound from './NotFound.jsx';
+import ViewDoctorProfile from './user/ViewDoctorProfile.jsx';
 
 function App() {
   const { user, isUserAuthenticated, isLoggedIn, checkAuth, isAuthLoading } =
@@ -77,7 +78,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<RoleSelection />} />
-          <Route path="*" element={<NotFound />}/>
+          <Route path="*" element={<NotFound />} />
 
           {/* User routes */}
           <Route
@@ -193,6 +194,15 @@ function App() {
               ) : (
                 <Navigate to="/userLogin" />
               )
+            }
+          />
+
+          <Route
+            path="/viewDoctorProfile/:doctorId"
+            element={
+              <UserMainLayout>
+                <ViewDoctorProfile />
+              </UserMainLayout>
             }
           />
 
