@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useAppointmentStore } from "../store/appointmentStore";
 import { axiosInstance } from "../api/api";
 import {
-  ArrowLeft,
   Calendar,
   Clock,
   MapPin,
@@ -15,7 +14,6 @@ import {
   Building2,
   Stethoscope,
   Heart,
-  CheckCircle,
   Loader,
 } from "lucide-react";
 
@@ -69,7 +67,7 @@ function ViewDoctorProfile() {
   }, [doctorId, selectedDate]);
 
   const handleBookSlot = (slot) => {
-    navigate(`/book-appointment/${doctorId}`, {
+    navigate(`/bookAppointment/${doctorId}`, {
       state: {
         doctor,
         slot,
@@ -112,14 +110,6 @@ function ViewDoctorProfile() {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-6 transition"
-        >
-          <ArrowLeft className="w-5 h-5" />
-          Back
-        </button>
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
             <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-200">
@@ -332,7 +322,7 @@ function ViewDoctorProfile() {
 
               <div className="mt-6 pt-6 border-t border-gray-200">
                 <button
-                  onClick={() => navigate(`/book-appointment/${doctor._id}`)}
+                  onClick={() => navigate(`/bookAppointment/${doctorId}`, {state: { doctor,selectedDate}})}
                   className="w-full bg-teal-600 text-white py-3 px-4 rounded-lg font-semibold hover:bg-teal-700 transition flex items-center justify-center gap-2"
                 >
                   <Calendar className="w-5 h-5" />

@@ -42,6 +42,7 @@ import DoctorSchedule from './doctor/DoctorSchedule.jsx';
 import DoctorPatients from './doctor/DoctorPatients.jsx';
 import NotFound from './NotFound.jsx';
 import ViewDoctorProfile from './user/ViewDoctorProfile.jsx';
+import BookAppointment from './user/BookAppintment.jsx';
 
 function App() {
   const { user, isUserAuthenticated, isLoggedIn, checkAuth, isAuthLoading } =
@@ -203,6 +204,19 @@ function App() {
               <UserMainLayout>
                 <ViewDoctorProfile />
               </UserMainLayout>
+            }
+          />
+
+          <Route
+            path="/bookAppointment/:doctorId"
+            element={
+              isUserAuthenticated ? (
+                <UserMainLayout>
+                  <BookAppointment />
+                </UserMainLayout>
+              ) : (
+                <Navigate to="/userLogin" />
+              )
             }
           />
 

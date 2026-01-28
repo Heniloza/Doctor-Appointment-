@@ -61,22 +61,25 @@ export const useAppointmentStore = create((set, get) => ({
 
   uploadReports: async (files) => {
     try {
-      const uploadPromises = files.map(async (file) => {
-        const base64 = await convertToBase64(file);
-        const response = await axiosInstance.post("/upload", {
-          file: base64,
-          folder: "appointments/reports",
-        });
-        return {
-          fileName: file.name,
-          fileUrl: response.data.url,
-          fileType: file.type,
-        };
+      const filesData = await Promise.all(
+        files.map(async (file) => {
+          const base64 = await convertToBase64(file);
+          return {
+            data: base64,
+            name: file.name,
+            type: file.type,
+          };
+        }),
+      );
+
+      const response = await axiosInstance.post("/upload/multiple", {
+        files: filesData,
+        folder: "appointments/reports",
       });
 
-      const uploadedFiles = await Promise.all(uploadPromises);
-      return uploadedFiles;
+      return response.data.files;
     } catch (error) {
+      console.error("Upload error:", error);
       toast.error("Failed to upload reports");
       throw error;
     }

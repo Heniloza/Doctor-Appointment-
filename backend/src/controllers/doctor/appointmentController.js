@@ -14,6 +14,7 @@ export const createAppointment = async (req, res) => {
       paymentId,
       orderId,
       paymentMethod,
+      reports
     } = req.body;
 
     const slot = await SLOT.findById(slotId);
@@ -61,6 +62,7 @@ export const createAppointment = async (req, res) => {
       paymentId,
       orderId,
       paymentMethod,
+      reports,
       paymentStatus: "paid",
       status: "confirmed",
     });

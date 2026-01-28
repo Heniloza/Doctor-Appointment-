@@ -10,7 +10,6 @@ import {
   ChevronRight,
   X,
   Calendar,
-  Heart,
   Loader,
   Building2,
 } from "lucide-react";
@@ -126,7 +125,7 @@ function FindDoctors() {
   });
 
   const handleBookAppointment = (doctor) => {
-    navigate(`/viewDoctorProfile/${doctor._id}`);
+    navigate(`/bookAppointment/${doctor._id}`,{state: { doctor}});
   };
 
   return (
@@ -400,7 +399,15 @@ function FindDoctors() {
                           <Calendar className="w-5 h-5" />
                           Book Appointment
                         </button>
-                       
+                        <button
+                          onClick={() =>
+                            navigate(`/viewDoctorProfile/${doctor._id}`)
+                          }
+                          className="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition flex items-center gap-2"
+                        >
+                          View Profile
+                          <ChevronRight className="w-5 h-5" />
+                        </button>
                       </div>
                     </div>
                   </div>

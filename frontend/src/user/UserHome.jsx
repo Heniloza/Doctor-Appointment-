@@ -66,8 +66,8 @@ function UserHome() {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-gray-900">
-            Welcome back, {user?.name?.split(" ")[0]}!
+          <h1 className="text-3xl font-bold text-gray-900 md:flex items-center gap-1">
+            Welcome back, <p className="text-teal-600 text-4xl">{user?.name?.split(" ")[0]}!</p>
           </h1>
           <p className="text-gray-600">How are you feeling today?</p>
         </div>
@@ -183,7 +183,7 @@ function UserHome() {
                   />
                   <div className="flex-1 min-w-0">
                     <h4 className="font-semibold text-gray-900 truncate">
-                      Dr. {doctor.name}
+                        {doctor.name}
                     </h4>
                     <p className="text-sm text-gray-600 truncate">
                       {doctor.specialization}
