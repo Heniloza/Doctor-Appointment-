@@ -12,6 +12,8 @@ import paymentRoutes from './routes/paymentRoute.js';
 import appointmentRoutes from './routes/appointmentRoute.js';
 import uploadRoutes from './routes/uploadRoutes.js';
 import userHealthRecordsRoutes from './routes/userHealthRecordRoutes.js';
+import doctorAppointmentRoutes from './routes/doctorAppointmentRoutes.js';
+import doctorPatientRoutes from './routes/patientRoutes.js';
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 
@@ -47,6 +49,8 @@ app.use("/api/payment",paymentRoutes)
 app.use("/api/appointment",appointmentRoutes)
 app.use("/api/upload", uploadRoutes);
 app.use("/api/healthRecords",userHealthRecordsRoutes)
+app.use("/api/doctor/appointments",doctorAppointmentRoutes)
+app.use("/api/doctor/patients",doctorPatientRoutes)
 
 app.listen(PORT, () => {
   console.log(`SERVER IS RUNNING ON PORT ${PORT}`);

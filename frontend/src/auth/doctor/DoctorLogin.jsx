@@ -49,9 +49,8 @@ function DoctorLogin() {
         </div>
 
         <div className="bg-white rounded-3xl shadow-2xl overflow-hidden">
-          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 px-8 py-6">
-            <h2 className="text-2xl font-bold text-white text-center flex items-center justify-center gap-2">
-              <Heart className="w-6 h-6" />
+          <div className="px-8 py-6">
+            <h2 className="text-2xl font-bold text-black text-center flex items-center justify-center gap-2">
               Doctor Portal Login
             </h2>
           </div>
