@@ -16,8 +16,11 @@ import doctorAppointmentRoutes from './routes/doctor/doctorAppointmentRoutes.js'
 import doctorPatientRoutes from './routes/doctor/patientRoutes.js';
 import clinicAppointmentRoutes from './routes/clinic/clinicAppointmentRoutes.js';
 import clinicPatientsRoutes from './routes/clinic/clinicPatientRoutes.js';
+import notificationRoutes from "./routes/notificationRoutes.js"
+import fcmTokenRoutes from "./routes/tokenRoutes.js"
 import cors from 'cors';
 import cookieParser from "cookie-parser";
+import { startAllReminderCrons } from "./utils/reminder.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -25,6 +28,7 @@ const PORT = process.env.PORT || 3000;
 connectDB(process.env.MONGO_URL)
   .then(() => {
     console.log('CONNECTED TO DATABASE');
+    startAllReminderCrons()
   })
   .catch((err) => {
     console.error('Failed to connect to MongoDB', err);
@@ -55,6 +59,8 @@ app.use("/api/doctor/appointments",doctorAppointmentRoutes)
 app.use("/api/doctor/patients",doctorPatientRoutes)
 app.use("/api/clinic/appointments",clinicAppointmentRoutes)
 app.use("/api/clinic/patients",clinicPatientsRoutes)
+app.use('/api/notifications', notificationRoutes);
+app.use('/api/fcm-token', fcmTokenRoutes);
 
 app.listen(PORT, () => {
   console.log(`SERVER IS RUNNING ON PORT ${PORT}`);

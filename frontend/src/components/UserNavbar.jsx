@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useUserAuthStore } from "../store/userAuthStore";
+import { useUserAuthStore } from "../store/userAuthStore.js";
+import { initializeFCM } from "../service/firebaseService.jsx";
+import Notifications from "../Notifications.jsx";
 import {
   Home,
   User,
   Calendar,
   Stethoscope,
   FileText,
-  Bell,
   LogOut,
   Menu,
   X,
@@ -19,6 +20,10 @@ function UserNavbar() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, userLogout } = useUserAuthStore();
+
+  useEffect(() => {
+    initializeFCM("user");
+  }, []);
 
   const handleLogout = async () => {
     await userLogout();
@@ -95,10 +100,7 @@ function UserNavbar() {
           </div>
 
           <div className="hidden md:flex items-center gap-2">
-            <button onClick={()=>navigate("/userNotifications")} className="relative p-2.5 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full"></span>
-            </button>
+            <Notifications userType="user" />
 
             <button
               onClick={() => navigate("/profile")}
@@ -126,10 +128,7 @@ function UserNavbar() {
           </div>
 
           <div className="md:hidden flex items-center gap-2">
-            <button className="relative p-2 rounded-xl text-gray-600 hover:bg-gray-50 hover:text-gray-900 transition-all">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-1 right-1 w-2 h-2 bg-rose-500 rounded-full"></span>
-            </button>
+            <Notifications userType="user" />
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

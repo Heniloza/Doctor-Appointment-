@@ -346,7 +346,7 @@ function ClinicHome() {
                         {apt.userId?.name || "Patient"}
                       </p>
                       <p className="text-sm text-gray-600">
-                        Dr. {apt.doctorId?.name || "Doctor"}
+                          {apt.doctorId?.name || "Doctor"}
                       </p>
                     </div>
                     <div className="text-right">
@@ -406,7 +406,7 @@ function ClinicHome() {
                     />
                     <div className="flex-1 min-w-0">
                       <p className="font-bold text-gray-900 truncate">
-                        Dr. {doctor.name}
+                          {doctor.name}
                       </p>
                       <p className="text-sm text-gray-600 truncate">
                         {doctor.specialization}

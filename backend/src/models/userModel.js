@@ -2,10 +2,10 @@ import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
   {
-    name:{
-        type: String,
-        required: [true, "Name is required"],
-        trim: true, 
+    name: {
+      type: String,
+      required: [true, "Name is required"],
+      trim: true,
     },
     email: {
       type: String,
@@ -49,6 +49,10 @@ const userSchema = new mongoose.Schema(
     role: {
       type: String,
       default: "user",
+    },
+    fcmToken: {
+      type: String,
+      default: null,
     },
   },
   { timestamps: true },

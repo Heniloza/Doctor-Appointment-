@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useDoctorAuthStore } from "../store/doctorAuthStore";
+import { useDoctorAuthStore } from "../store/doctorAuthStore.js";
+import { initializeFCM } from "../service/firebaseService.jsx";
+import Notifications from "../Notifications.jsx";
 import {
   Stethoscope,
   Menu,
@@ -13,9 +15,6 @@ import {
   LogOut,
   User,
   ChevronDown,
-  Bell,
-  Heart,
-  FileText,
 } from "lucide-react";
 
 function DoctorNavbar() {
@@ -24,6 +23,10 @@ function DoctorNavbar() {
   const { doctor, doctorLogout } = useDoctorAuthStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    initializeFCM("doctor");
+  }, []);
 
   const handleLogout = async () => {
     await doctorLogout();
@@ -48,7 +51,7 @@ function DoctorNavbar() {
               </div>
               <div className="hidden sm:block">
                 <h1 className="text-xl font-bold text-gray-900">
-                    {doctor?.name?.split(" ").pop() || "Portal"}
+                  {doctor?.name?.split(" ").pop() || "Portal"}
                 </h1>
                 <p className="text-xs text-gray-500">Healthcare Professional</p>
               </div>
@@ -77,13 +80,9 @@ function DoctorNavbar() {
           </div>
 
           <div className="flex items-center space-x-3">
-            <button
-              onClick={() => navigate("/doctorNotifications")}
-              className="hidden md:block relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition"
-            >
-              <Bell className="h-5 w-5" />
-              <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
-            </button>
+            <div className="hidden md:block">
+              <Notifications userType="doctor" />
+            </div>
 
             <div className="relative">
               <button
@@ -119,7 +118,6 @@ function DoctorNavbar() {
                     onClick={() => setIsProfileDropdownOpen(false)}
                   ></div>
                   <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-20">
-
                     {doctor?.clinicId && (
                       <div className="px-4 py-3 bg-emerald-50 border-b border-emerald-200">
                         <p className="text-xs text-emerald-700 font-semibold mb-1">

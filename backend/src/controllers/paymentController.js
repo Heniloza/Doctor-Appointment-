@@ -1,5 +1,7 @@
 import Razorpay from "razorpay";
 import crypto from "crypto";
+import { notifyPaymentSuccess } from "../utils/notificationHelper.js";
+import APPOINTMENT from "../models/appointmentModel.js";
 
 const razorpay = new Razorpay({
   key_id: process.env.RAZORPAY_KEY_ID,
@@ -51,7 +53,12 @@ export const createRazorpayOrder = async (req, res) => {
 
 export const verifyRazorpayPayment = async (req, res) => {
   try {
-    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+    const {
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+      appointmentId,
+    } = req.body;
 
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSign = crypto
@@ -60,6 +67,27 @@ export const verifyRazorpayPayment = async (req, res) => {
       .digest("hex");
 
     if (razorpay_signature === expectedSign) {
+      if (appointmentId) {
+        try {
+          const appointment = await APPOINTMENT.findById(appointmentId)
+            .populate("userId", "name email phone")
+            .populate("doctorId", "name specialization")
+            .populate("clinicId", "clinicName");
+
+          if (appointment) {
+            // Get amount from appointment
+            const amount = appointment.amount;
+
+            await notifyPaymentSuccess(appointment, amount);
+          }
+        } catch (notificationError) {
+          console.error(
+            "Error sending payment notification:",
+            notificationError,
+          );
+        }
+      }
+
       return res.status(200).json({
         success: true,
         message: "Payment verified successfully",

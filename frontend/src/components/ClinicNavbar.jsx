@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useClinicAuthStore } from "../store/clinicAuthStore";
+import { useClinicAuthStore } from "../store/clinicAuthStore.js";
+import { initializeFCM } from "../service/firebaseService.jsx";
+import Notifications from "../Notifications.jsx";
 import {
   Building2,
   Menu,
@@ -12,8 +14,6 @@ import {
   LogOut,
   User,
   ChevronDown,
-  Bell,
-  MessageSquare,
 } from "lucide-react";
 
 function ClinicNavbar() {
@@ -22,6 +22,10 @@ function ClinicNavbar() {
   const { clinic, clinicLogout } = useClinicAuthStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    initializeFCM("clinic");
+  }, []);
 
   const handleLogout = async () => {
     await clinicLogout();
@@ -75,10 +79,9 @@ function ClinicNavbar() {
           </div>
 
           <div className="flex items-center space-x-3">
-            <button onClick={()=> navigate("/clinicNotifications")} className="hidden md:block relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition">
-              <Bell className="h-5 w-5" />
-              <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
-            </button>
+            <div className="hidden md:block">
+              <Notifications userType="clinic" />
+            </div>
 
             <div className="relative">
               <button

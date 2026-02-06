@@ -3,6 +3,11 @@ import DOCTOR from "../../models/doctorModel.js";
 import SLOT from "../../models/slotModel.js";
 import CLINIC from "../../models/clinicModel.js";
 
+import {
+  notifyNewAppointment,
+  notifyAppointmentCancelled,
+} from "../../utils/notificationHelper.js";
+
 export const createAppointment = async (req, res) => {
   try {
     const userId = req.user._id;
@@ -14,7 +19,7 @@ export const createAppointment = async (req, res) => {
       paymentId,
       orderId,
       paymentMethod,
-      reports
+      reports,
     } = req.body;
 
     const slot = await SLOT.findById(slotId);
@@ -75,6 +80,8 @@ export const createAppointment = async (req, res) => {
       .populate("userId", "name email phone")
       .populate("doctorId", "name specialization qualification")
       .populate("clinicId", "clinicName city");
+
+    await notifyNewAppointment(populatedAppointment);
 
     res.status(201).json({
       success: true,
@@ -202,6 +209,13 @@ export const cancelAppointment = async (req, res) => {
       slot.appointmentId = null;
       await slot.save();
     }
+
+    const populatedAppointment = await APPOINTMENT.findById(appointment._id)
+      .populate("userId", "name email phone")
+      .populate("doctorId", "name specialization qualification")
+      .populate("clinicId", "clinicName city");
+
+    await notifyAppointmentCancelled(populatedAppointment, "user");
 
     res.status(200).json({
       success: true,

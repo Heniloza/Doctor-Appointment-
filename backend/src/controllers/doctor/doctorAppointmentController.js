@@ -1,5 +1,9 @@
 import APPOINTMENT from "../../models/appointmentModel.js";
 import SLOT from "../../models/slotModel.js";
+import {
+  notifyConsultationCompleted,
+  notifyAppointmentCancelled,
+} from "../../utils/notificationHelper.js";
 
 export const getDoctorAppointmentsController = async (req, res) => {
   try {
@@ -125,7 +129,10 @@ export const completeAppointmentController = async (req, res) => {
         "name email phone profilePicture dateOfBirth bloodGroup",
       )
       .populate("clinicId", "clinicName address city phone email")
-      .populate("slotId");
+      .populate("slotId")
+      .populate("doctorId", "name specialization"); 
+
+    await notifyConsultationCompleted(updatedAppointment);
 
     res.status(200).json({
       success: true,
@@ -197,7 +204,10 @@ export const cancelDoctorAppointmentController = async (req, res) => {
         "name email phone profilePicture dateOfBirth bloodGroup",
       )
       .populate("clinicId", "clinicName address city phone email")
-      .populate("slotId");
+      .populate("slotId")
+      .populate("doctorId", "name specialization"); 
+
+    await notifyAppointmentCancelled(updatedAppointment, "doctor");
 
     res.status(200).json({
       success: true,

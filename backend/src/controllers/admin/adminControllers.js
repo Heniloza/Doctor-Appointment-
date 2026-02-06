@@ -2,6 +2,7 @@ import ClINIC from "../../models/clinicModel.js";
 import USER from "../../models/userModel.js";
 import DOCTOR from "../../models/doctorModel.js";
 import APPOINTMENT from "../../models/appointmentModel.js";
+import { sendApproveEmail, sendRejectEmail } from "../../utils/sendOtp.js";
 
 export const getPendingClinicsController = async (req, res) => {
   try {
@@ -38,6 +39,8 @@ export const approveClinicController = async (req, res) => {
       });
     }
 
+    await sendApproveEmail(clinic?.email)
+
     res.status(200).json({
       success: true,
       message: "Clinic approved successfully",
@@ -68,6 +71,8 @@ export const rejectClinicController = async (req, res) => {
         message: "Clinic not found",
       });
     }
+
+    await sendRejectEmail(clinic?.email)
 
     res.status(200).json({
       success: true,

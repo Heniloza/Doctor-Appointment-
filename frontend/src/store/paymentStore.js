@@ -106,4 +106,5 @@ export const usePaymentStore = create((set) => ({
     const razorpay = new window.Razorpay(options);
     razorpay.open();
   },
+  
 }));
