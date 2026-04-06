@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Users, Building2, Stethoscope, ArrowRight, Heart } from "lucide-react";
+import {
+  Users,
+  Building2,
+  Stethoscope,
+  UserCircle,
+  ArrowRight,
+  Heart,
+} from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 export default function RoleSelection() {
@@ -53,6 +60,25 @@ export default function RoleSelection() {
       textColor: "text-cyan-600",
       path: "/doctorLogin",
       benefits: ["Schedule control", "Patient management", "Practice growth"],
+    },
+    {
+      id: "receptionist",
+      title: "Receptionist",
+      subtitle: "Manage Appointments",
+      description:
+        "Manage doctor's appointments, handle patient bookings, and streamline daily operations efficiently",
+      icon: UserCircle,
+      gradientFrom: "from-purple-500",
+      gradientTo: "to-pink-600",
+      lightBg: "bg-purple-50",
+      borderColor: "border-purple-200",
+      textColor: "text-purple-600",
+      path: "/receptionistLogin",
+      benefits: [
+        "Appointment control",
+        "Patient support",
+        "Schedule management",
+      ],
     },
   ];
 
@@ -108,7 +134,7 @@ export default function RoleSelection() {
             </p>
           </div>
 
-          <div className="w-full max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-5 mb-0 px-1 sm:px-0">
+          <div className="w-full max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 mb-0 px-1 sm:px-0">
             {roles.map((role, index) => {
               const Icon = role.icon;
               const isSelected = selectedRole === role.id;

@@ -395,12 +395,7 @@ function ClinicProfile() {
           </div>
         </div>
 
-        <div className="mt-6 bg-white rounded-xl shadow-md p-4">
-          <p className="text-sm text-gray-600 text-center">
-            <strong>Note:</strong> Profile picture changes are instant. Other
-            changes require saving.
-          </p>
-        </div>
+            
       </div>
     </div>
   );

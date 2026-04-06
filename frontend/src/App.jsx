@@ -27,7 +27,6 @@ import Clinics from './admin/Clinics.jsx';
 import ClinicDoctors from './clinic/ClinicDoctors.jsx';
 import ClinicAppointments from './clinic/ClinicAppointments.jsx';
 import ClinicPatients from './clinic/ClinicPatients.jsx';
-import ClinicSettings from './clinic/ClinicSettings.jsx';
 import ClinicNotification from './clinic/ClinicNotification.jsx';
 import ClinicProfile from './clinic/ClinicProfile.jsx';
 import DoctorLogin from './auth/doctor/DoctorLogin.jsx';
@@ -35,7 +34,6 @@ import { useDoctorAuthStore } from './store/doctorAuthStore.js';
 import DoctorMainLayout from './layout/DoctorMainLayout.jsx';
 import DoctorHome from './doctor/DoctorHome.jsx';
 import DoctorProfile from './doctor/DoctorProfile.jsx';
-import DoctorSettings from './doctor/DoctorSettings.jsx';
 import DoctorNotifications from './doctor/DoctorNotifications.jsx';
 import DoctorAppointments from './doctor/DoctorAppointments.jsx';
 import DoctorSchedule from './doctor/DoctorSchedule.jsx';
@@ -45,6 +43,10 @@ import ViewDoctorProfile from './user/ViewDoctorProfile.jsx';
 import BookAppointment from './user/BookAppintment.jsx';
 import ChangePassword from './ChangePassword.jsx';
 import ChangeClinicPassword from './ChangeClinicPassword.jsx';
+import ReceptionistLogin from './auth/receptionist/ReceptionistLogin.jsx';
+import ReceptionistDashboard from './auth/receptionist/ReceptionistDashboard.jsx';
+import { useReceptionistStore } from './store/receptionistStore.js';
+import DoctorReceptionist from './doctor/DoctorReceptionist.jsx';
 
 function App() {
   const { user, isUserAuthenticated, isLoggedIn, checkAuth, isAuthLoading } =
@@ -55,6 +57,8 @@ function App() {
     isClinicAuthLoading,
   } = useClinicAuthStore();
   const { isDoctorAuthenticated, checkDoctorAuth } = useDoctorAuthStore();
+  const { isReceptionistAuthenticated, checkReceptionistAuth } =
+    useReceptionistStore();
 
   useEffect(() => {
     checkAuth();
@@ -67,6 +71,10 @@ function App() {
   useEffect(() => {
     checkDoctorAuth();
   }, [checkDoctorAuth]);
+
+  useEffect(()=>{
+    checkReceptionistAuth();
+  },[checkReceptionistAuth])
 
   if (isAuthLoading || isClinicAuthLoading) {
     return (
@@ -290,7 +298,10 @@ function App() {
           />
 
           {/* Clinic Routes */}
-          <Route path='/clinic/changePassword' element={<ChangeClinicPassword />}/>
+          <Route
+            path="/clinic/changePassword"
+            element={<ChangeClinicPassword />}
+          />
           <Route
             path="/clinicSignup"
             element={
@@ -379,19 +390,6 @@ function App() {
           />
 
           <Route
-            path="/clinicSettings"
-            element={
-              isClinicAuthenticated ? (
-                <ClinicMainLayout>
-                  <ClinicSettings />
-                </ClinicMainLayout>
-              ) : (
-                <Navigate to="/clinicLogin" />
-              )
-            }
-          />
-
-          <Route
             path="/clinicNotifications"
             element={
               isClinicAuthenticated ? (
@@ -442,18 +440,6 @@ function App() {
             }
           />
 
-          <Route
-            path="/doctorSettings"
-            element={
-              isDoctorAuthenticated ? (
-                <DoctorMainLayout>
-                  <DoctorSettings />
-                </DoctorMainLayout>
-              ) : (
-                <Navigate to={"/doctorLogin"} />
-              )
-            }
-          />
 
           <Route
             path="/doctorNotifications"
@@ -503,6 +489,40 @@ function App() {
                 </DoctorMainLayout>
               ) : (
                 <Navigate to={"/doctorLogin"} />
+              )
+            }
+          />
+          <Route
+            path="doctorReceptionist"
+            element={
+              isDoctorAuthenticated ? (
+                <DoctorMainLayout>
+                  <DoctorReceptionist />
+                </DoctorMainLayout>
+              ) : (
+                <Navigate to={"/doctorLogin"} />
+              )
+            }
+          />
+
+          {/* {Receptionist Routes} */}
+          <Route
+            path="/receptionistLogin"
+            element={
+              !isReceptionistAuthenticated ? (
+                <ReceptionistLogin />
+              ) : (
+                <ReceptionistDashboard />
+              )
+            }
+          />
+          <Route
+            path="/receptionistDashboard"
+            element={
+              isReceptionistAuthenticated ? (
+                <ReceptionistDashboard />
+              ) : (
+                <ReceptionistLogin />
               )
             }
           />

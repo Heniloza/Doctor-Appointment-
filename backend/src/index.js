@@ -22,6 +22,9 @@ import forgetPasswordRoutes from "./routes/forgetPasswordRoutes.js"
 import cors from 'cors';
 import cookieParser from "cookie-parser";
 import { startAllReminderCrons } from "./utils/reminder.js";
+import receptionistAuthRoutes from "./routes/receptionist/receptionistAuthRoutes.js";
+import receptionistAppointmentRoutes from "./routes/receptionist/receptionistAppointmentRoutes.js";
+import doctorReceptionistRoutes from "./routes/doctor/doctorReceptionistRoutes.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -63,6 +66,9 @@ app.use("/api/clinic/patients",clinicPatientsRoutes)
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/fcm-token', fcmTokenRoutes);
 app.use("/api/forgetPassword",forgetPasswordRoutes)
+app.use("/api/receptionist", receptionistAuthRoutes);
+app.use("/api/receptionist/appointments", receptionistAppointmentRoutes);
+app.use("/api/doctor/receptionist", doctorReceptionistRoutes);
 
 app.listen(PORT, () => {
   console.log(`SERVER IS RUNNING ON PORT ${PORT}`);

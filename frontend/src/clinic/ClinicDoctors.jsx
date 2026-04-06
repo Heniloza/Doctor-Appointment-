@@ -60,6 +60,55 @@ function ClinicDoctors() {
     });
   };
 
+  const specializations = [
+    "General Physician",
+    "Internal Medicine",
+    "Family Medicine",
+    "Cardiology",
+    "Neurology",
+    "Orthopedics",
+    "Dermatology",
+    "Pediatrics",
+    "Gynecology",
+    "Psychiatry",
+    "ENT (Otolaryngology)",
+    "Ophthalmology",
+    "Pulmonology",
+    "Gastroenterology",
+    "Nephrology",
+    "Endocrinology",
+    "Rheumatology",
+    "Oncology",
+    "Urology",
+    "Andrology",
+    "General Surgery",
+    "Neurosurgery",
+    "Cardiothoracic Surgery",
+    "Plastic Surgery",
+    "Vascular Surgery",
+    "Laparoscopic Surgery",
+    "Radiology",
+    "Pathology",
+    "Anesthesiology",
+    "Nuclear Medicine",
+    "Obstetrics",
+    "Reproductive Medicine",
+    "Neonatology",
+    "Clinical Psychology",
+    "Physiotherapy",
+    "Sports Medicine",
+    "Rehabilitation Medicine",
+    "Dentistry",
+    "Orthodontics",
+    "Endodontics",
+    "Periodontics",
+    "Oral & Maxillofacial Surgery",
+    "Ayurveda",
+    "Homeopathy",
+    "Unani",
+    "Naturopathy",
+  ];
+
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -494,15 +543,20 @@ function ClinicDoctors() {
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Specialization *
                   </label>
-                  <input
-                    type="text"
+                  <select
                     name="specialization"
                     value={formData.specialization}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition text-lg"
-                    placeholder="e.g., Cardiologist"
-                  />
+                  >
+                    <option value="">Select Specialization</option>
+                    {specializations.map((spec, index) => (
+                      <option key={index} value={spec}>
+                        {spec}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>
@@ -710,15 +764,20 @@ function ClinicDoctors() {
                     <Award className="w-4 h-4 text-purple-600" />
                     Specialization *
                   </label>
-                  <input
-                    type="text"
+                  <select
                     name="specialization"
                     value={formData.specialization}
                     onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent transition text-lg"
-                    placeholder="e.g., Cardiologist"
-                  />
+                  >
+                    <option value="">Select Specialization</option>
+                    {specializations.map((spec, index) => (
+                      <option key={index} value={spec}>
+                        {spec}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>

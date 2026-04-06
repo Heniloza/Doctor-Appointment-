@@ -133,15 +133,6 @@ function ClinicNavbar() {
                       <span>My Profile</span>
                     </Link>
 
-                    <Link
-                      to="/clinicSettings"
-                      onClick={() => setIsProfileDropdownOpen(false)}
-                      className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
-                    >
-                      <Settings className="h-4 w-4" />
-                      <span>Settings</span>
-                    </Link>
-
                     <div className="border-t border-gray-200 my-2"></div>
 
                     <button
@@ -202,15 +193,6 @@ function ClinicNavbar() {
             >
               <User className="h-5 w-5" />
               <span className="font-medium">My Profile</span>
-            </Link>
-
-            <Link
-              to="/clinicSettings"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition"
-            >
-              <Settings className="h-5 w-5" />
-              <span className="font-medium">Settings</span>
             </Link>
 
             <button

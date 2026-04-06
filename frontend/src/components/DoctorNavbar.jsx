@@ -15,6 +15,7 @@ import {
   LogOut,
   User,
   ChevronDown,
+  UserCheck,
 } from "lucide-react";
 
 function DoctorNavbar() {
@@ -38,6 +39,7 @@ function DoctorNavbar() {
     { name: "My Schedule", path: "/doctorSchedule", icon: Calendar },
     { name: "Appointments", path: "/doctorAppointments", icon: Clock },
     { name: "Patients", path: "/doctorPatients", icon: Users },
+    { name: "Receptionist", path: "/doctorReceptionist", icon: UserCheck },
   ];
 
   return (
@@ -141,15 +143,6 @@ function DoctorNavbar() {
                       <span>My Profile</span>
                     </Link>
 
-                    <Link
-                      to="/doctorSettings"
-                      onClick={() => setIsProfileDropdownOpen(false)}
-                      className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition"
-                    >
-                      <Settings className="h-4 w-4" />
-                      <span>Settings</span>
-                    </Link>
-
                     <div className="border-t border-gray-200 my-2"></div>
 
                     <button
@@ -210,15 +203,6 @@ function DoctorNavbar() {
             >
               <User className="h-5 w-5" />
               <span className="font-medium">My Profile</span>
-            </Link>
-
-            <Link
-              to="/doctorSettings"
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition"
-            >
-              <Settings className="h-5 w-5" />
-              <span className="font-medium">Settings</span>
             </Link>
 
             <button
